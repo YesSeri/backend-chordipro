@@ -1,11 +1,15 @@
 {
-  "name": "chordipro-backend",
-  "version": "1.0.0",
-  "description": "API for mongodb",
-  "main": "index.js",
-  "author": "Henrik Zenkert",
-  "license": "MIT",
-  "dependencies": {
-    "mongodb": "^4.2.1"
-  }
+	"name": "chordipro-backend",
+	"version": "1.0.0",
+	"description": "API for mongodb",
+	"main": "index.js",
+	"author": "Henrik Zenkert",
+	"license": "MIT",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"express": "^4.17.1",
+		"mongodb": "^4.2.1"
+	}
 }
