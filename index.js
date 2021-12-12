@@ -12,10 +12,15 @@ const app = express();
 // );
 // app.options('*', cors());
 db.connect();
-app.get('/', async (req, res) => {
+app.get('/all', async (req, res) => {
 	const json = await db.getTitles();
 	res.json(json)
 });
+app.get('/titles', async (req, res) => {
+	const json = await db.getTitles();
+	res.json(json)
+});
+
 
 const port = process.env.PORT || 3000
 app.listen(port, function () {
