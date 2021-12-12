@@ -1,4 +1,4 @@
-const { test } = require('./db')
+const { db } = require('./db')
 
 const express = require('express');
 const app = express();
@@ -11,15 +11,13 @@ const app = express();
 // 	})
 // );
 // app.options('*', cors());
-
-app.get('/', (req, res) => res.send('Working!!!'));
-
-app.listen(process.env.PORT || 3000, function () {
-	console.log('server running on port 3000', '');
+db.connect();
+app.get('/', async (req, res) => {
+	const json = await db.getAll();
+	res.json(json)
 });
 
-async function main() {
-	const res = await test();
-	console.log({ res })
-
-}
+const port = process.env.PORT || 3000
+app.listen(port, function () {
+	console.log('Server running on: ' + port);
+});

@@ -5,7 +5,18 @@ const uri = "mongodb+srv://chordiproUsers:P4K6bi6c5NMPC7dKgbrZ4AstmSwQMwX@chordi
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 // This gets all from my server and returns it.
 
-async function test() {
+async function connect() {
+	return new Promise((res, rej) => {
+		client.connect(err => {
+			if (err) {
+				rej(err)
+			} else {
+				res()
+			}
+		})
+	})
+}
+async function getAll() {
 	return new Promise((res, rej) => {
 		client.connect(err => {
 			if (err) {
@@ -13,7 +24,6 @@ async function test() {
 			} else {
 				const collection = client.db("chordipro").collection("songs");
 				collection.find({}).toArray(function (err, result) {
-					client.close();
 					if (err) {
 						rej(err)
 					} else {
@@ -22,9 +32,10 @@ async function test() {
 				})
 			}
 		});
-
-
 	})
 }
+function close() {
+	client.close();
+}
 
-module.exports = { test }
+module.exports = { db: { close, connect, getAll } }
