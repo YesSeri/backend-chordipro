@@ -13,7 +13,7 @@ const app = express();
 // app.options('*', cors());
 db.connect();
 app.get('/', async (req, res) => {
-	const json = await db.getAll();
+	const json = await db.getTitles();
 	res.json(json)
 });
 
