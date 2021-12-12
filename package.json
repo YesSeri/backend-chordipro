@@ -1,0 +1,11 @@
+{
+  "name": "chordipro-backend",
+  "version": "1.0.0",
+  "description": "API for mongodb",
+  "main": "index.js",
+  "author": "Henrik Zenkert",
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "^4.2.1"
+  }
+}
