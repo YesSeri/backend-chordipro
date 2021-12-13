@@ -48,7 +48,7 @@ async function getObjById(id) {
 				throw new Error('Something went wrong in db connection.', err)
 			}
 			const collection = client.db("chordipro").collection("songs");
-			collection.find(ObjectId(id)).toArray(function (err, result) {
+			collection.findOne({ _id: ObjectId(id) }, function (err, result) {
 				close()
 				if (err) {
 					throw new Error('Something went wrong in getObjById', err)
