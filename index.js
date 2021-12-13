@@ -12,7 +12,7 @@ app.get('/all', async (req, res) => {
 });
 app.get('/', async (req, res) => {
 	const json = await db.getTitles();
-	res.json('test': 'aaaa')
+	res.json({ 'test': 'aaaa' });
 });
 app.get('/song/:id', async (req, res) => {
 	const { params: { id } } = req
