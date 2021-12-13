@@ -6,12 +6,15 @@ const app = express();
 // // 	next()
 // // })
 
-// app.get('/all', async (req, res) => {
-// 	db.getAll().then(json => res.json(json)).catch(err => {
-// 		console.error(err)
-// 		res.json("")
-// 	});
-// });
+app.get('/all', async (req, res) => {
+	try {
+		const data = await db.getAll()
+		res.json(data)
+	} catch (error) {
+		console.log(error);
+		res.json("")
+	}
+});
 app.get('/', async (req, res) => {
 	try {
 		const data = await db.getTitles()
@@ -21,19 +24,19 @@ app.get('/', async (req, res) => {
 		res.json("")
 	}
 });
-// app.get('/song/:id', async (req, res) => {
-// 	const { params: { id } } = req
-// 	// Send song if there is one if there is no song, send empty string.
-// 	// db.getObjById(id).then(song => res.json(song)).catch(err => {
-// 	// 	res.json({ title: '' }
-// 	// }))
-// 	db.getObjById().then(json => res.json(json)).catch(err => {
-// 		console.error(err)
-// 		res.json("")
-// 	});
-// })
+app.get('/song/:id', async (req, res) => {
+	const { params: { id } } = req
+	// Send song if there is one if there is no song, send empty string.
+	try {
+		const data = await db.getObjById(id)
+		res.json(data)
+	} catch (error) {
+		console.log(error);
+		res.json("")
+	}
+})
 
-const port = process.env.PORT || 3000;
+var port = process.env.PORT || 3000;
 app.listen(port, () => {
 	console.log(`Example app listening at ${port}`)
 })
