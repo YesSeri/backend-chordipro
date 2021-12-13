@@ -6,7 +6,8 @@
 	"author": "Henrik Zenkert",
 	"license": "MIT",
 	"scripts": {
-		"start": "node index.js"
+		"start": "node index.js",
+		"nodemon": "nodemon index.js"
 	},
 	"dependencies": {
 		"express": "^4.17.1",

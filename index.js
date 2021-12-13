@@ -13,10 +13,13 @@ const app = express();
 // 	});
 // });
 app.get('/', async (req, res) => {
-	db.getTitles().then(json => res.json(json)).catch(err => {
-		console.error(err)
+	try {
+		const data = await db.getTitles()
+		res.json(data)
+	} catch (error) {
+		console.log(error);
 		res.json("")
-	});
+	}
 });
 // app.get('/song/:id', async (req, res) => {
 // 	const { params: { id } } = req
