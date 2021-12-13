@@ -18,7 +18,8 @@ app.get('/all', async (req, res) => {
 });
 app.get('/', async (req, res) => {
 	const json = await db.getTitles();
-	res.json(json)
+	res.json({ test: "test" })
+	// res.json(json)
 });
 
 
