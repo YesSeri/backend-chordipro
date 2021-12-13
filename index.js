@@ -6,6 +6,8 @@ const app = express();
 // // 	next()
 // // })
 
+app.use(cors())
+
 app.get('/all', async (req, res) => {
 	try {
 		const data = await db.getAll()
