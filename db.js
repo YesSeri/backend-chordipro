@@ -5,27 +5,17 @@ const uri = "mongodb+srv://chordiproUsers:P4K6bi6c5NMPC7dKgbrZ4AstmSwQMwX@chordi
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 // This gets all from my server and returns it.
 
-async function connect() {
-	return new Promise((res, rej) => {
-		client.connect(err => {
-			if (err) {
-				rej(err)
-			} else {
-				res()
-			}
-		})
-	})
-}
 async function getAll() {
 	return new Promise((res, rej) => {
 		client.connect(err => {
 			if (err) {
-				rej(err)
+				throw new Error('Something went wrong in db connection.', err)
 			}
 			const collection = client.db("chordipro").collection("songs");
 			collection.find({}).toArray(function (err, result) {
+				close()
 				if (err) {
-					rej(err)
+					throw new Error('Something went wrong in getAll', err)
 				} else {
 					res(result)
 				}
@@ -37,12 +27,13 @@ async function getTitles() {
 	return new Promise((res, rej) => {
 		client.connect(err => {
 			if (err) {
-				rej(err)
+				throw new Error('Something went wrong in db connection.', err)
 			}
 			const collection = client.db("chordipro").collection("songs");
 			collection.find({}, { projection: { title: 1 } }).toArray(function (err, result) {
+				close()
 				if (err) {
-					rej(err)
+					throw new Error('Something went wrong in getTitles', err)
 				} else {
 					res(result)
 				}
@@ -54,12 +45,13 @@ async function getObjById(id) {
 	return new Promise((res, rej) => {
 		client.connect(err => {
 			if (err) {
-				rej(err)
+				throw new Error('Something went wrong in db connection.', err)
 			}
 			const collection = client.db("chordipro").collection("songs");
 			collection.find(ObjectId(id)).toArray(function (err, result) {
+				close()
 				if (err) {
-					rej(err)
+					throw new Error('Something went wrong in getObjById', err)
 				} else {
 					res(result)
 				}
@@ -71,4 +63,4 @@ function close() {
 	client.close();
 }
 
-module.exports = { db: { close, connect, getAll, getTitles, getObjById } }
+module.exports = { db: { close, getAll, getTitles, getObjById } }
