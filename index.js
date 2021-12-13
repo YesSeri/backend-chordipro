@@ -1,4 +1,4 @@
-// const { db } = require('./db')
+const { db } = require('./db')
 
 const express = require('express');
 const app = express();
@@ -13,11 +13,10 @@ const app = express();
 // 	});
 // });
 app.get('/', async (req, res) => {
-	// db.getTitles().then(json => res.json(json)).catch(err => {
-	// 	console.error(err)
-	// 	res.json("")
-	// });
-	res.json("aaaaa")
+	db.getTitles().then(json => res.json(json)).catch(err => {
+		console.error(err)
+		res.json("")
+	});
 });
 // app.get('/song/:id', async (req, res) => {
 // 	const { params: { id } } = req
