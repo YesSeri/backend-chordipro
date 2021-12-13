@@ -2,11 +2,13 @@ const { db } = require('./db')
 
 const express = require('express');
 const app = express();
-db.connect();
 // app.use(function (req, res, next) {
 // 	next()
 // })
+db.connect();
+
 app.get('/all', async (req, res) => {
+	console.log()
 	const json = await db.getAll();
 	res.json(json)
 });
