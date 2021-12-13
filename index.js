@@ -12,10 +12,15 @@ app.get('/all', async (req, res) => {
 });
 app.get('/', async (req, res) => {
 	const json = await db.getTitles();
-	res.json({ 'test': 'aaaa' });
+	res.json(json);
 });
 app.get('/song/:id', async (req, res) => {
 	const { params: { id } } = req
 	// Send song if there is one if there is no song, send empty string.
 	db.getObjById(id).then(song => res.json(song)).catch(res.json({ title: '' }))
 });
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+	console.log(`Example app listening at ${port}`)
+})
