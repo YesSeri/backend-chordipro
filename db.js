@@ -23,14 +23,14 @@ async function getAll() {
 		})
 	})
 }
-async function getTitles() {
+async function getOverview() {
 	return new Promise((res, rej) => {
 		client.connect(err => {
 			if (err) {
 				throw new Error('Something went wrong in db connection.', err)
 			}
 			const collection = client.db("chordipro").collection("songs");
-			collection.find({}, { projection: { title: 1 } }).toArray(function (err, result) {
+			collection.find({}, { projection: { title: 1, artist: 1 } }).toArray(function (err, result) {
 				close()
 				if (err) {
 					throw new Error('Something went wrong in getTitles', err)
@@ -63,4 +63,4 @@ function close() {
 	client.close();
 }
 
-module.exports = { db: { close, getAll, getTitles, getObjById } }
+module.exports = { db: { close, getAll, getOverview, getObjById } }

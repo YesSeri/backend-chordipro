@@ -21,8 +21,7 @@ app.get('/all', async (req, res) => {
 });
 app.get('/', async (req, res) => {
 	try {
-		const data = await db.getTitles()
-		console.log({ data })
+		const data = await db.getOverview()
 		res.json(data)
 	} catch (error) {
 		console.log(error);
@@ -34,7 +33,6 @@ app.get('/song/:id', async (req, res) => {
 	// Send song if there is one if there is no song, send empty string.
 	try {
 		const data = await db.getObjById(id)
-		console.log({ data })
 		res.json(data)
 	} catch (error) {
 		console.log(error);
