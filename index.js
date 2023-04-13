@@ -12,10 +12,9 @@ app.use(cors())
 app.get('/all', async (req, res) => {
 	try {
 		const data = await db.getAll()
-		console.log({ data })
 		res.json(data)
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 		res.json("")
 	}
 });
@@ -24,7 +23,7 @@ app.get('/', async (req, res) => {
 		const data = await db.getOverview()
 		res.json(data)
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 		res.json("")
 	}
 });
@@ -35,7 +34,7 @@ app.get('/song/:id', async (req, res) => {
 		const data = await db.getObjById(id)
 		res.json(data)
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 		res.json("")
 	}
 })
